@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سیستم مدیریت کارها</title>
+    <style>
+        /* استایل‌های برای بدنه صفحه و بک‌گراند داینامیک */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, #3498db, #e74c3c, #2ecc71, #f39c12);
+            background-size: 400% 400%;
+            animation: gradientAnimation 35s ease infinite;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* استایل‌های برای عناصر دیگر صفحه */
+
+        h1 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        input {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>سیستم مدیریت کارها</h1>
+    <ul>
+        <!-- ایجاد لیست کارها با استفاده از دستور حلقه -->
+        {% for task in tasks %}
+            <li>
+                {{ task }}
+                <!-- ایجاد لینک برای حذف هر کار -->
+                <a href="{{ url_for('delete', task_id=loop.index-1) }}">حذف</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <!-- فرم برای افزودن کار جدید -->
+    <form action="{{ url_for('add') }}" method="post">
+        <label for="task">افزودن کار جدید:</label>
+        <input type="text" id="task" name="task" required>
+        <button type="submit">افزودن</button>
+    </form>
+</body>
+</html>
